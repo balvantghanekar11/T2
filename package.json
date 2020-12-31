@@ -1,0 +1,24 @@
+{
+  "name": "t2",
+  "version": "1.0.0",
+  "description": "Basic CRUD operation in NODEJS MYsql POSTman",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balvantghanekar11/T2.git"
+  },
+  "author": "balvant ghanekar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/balvantghanekar11/T2/issues"
+  },
+  "homepage": "https://github.com/balvantghanekar11/T2#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
