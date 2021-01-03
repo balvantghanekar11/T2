@@ -69,17 +69,40 @@ app.delete("/employee/:id", (res, req) => {
 
 //Insert new employee
 app.post("/employee", (req, res) => {
-  let emp = req.body;
-  var sql =
-    "SET @EmpID = ?;SET @Name = ?;SET @EmpCode = ?;SET @Salary = ?;\
-   CALL EmployeeAddOrEdit(@EmpID,@Name,@EmpCode,@Salary);";
-  mysqlConnection.query(sql,[emp.EmpID, emp.Name, emp.EmpCode, emp.Salary],(err, rows, fileds) => {
-      if (!err) {
-        rows.forEach(element => {
-          if (element.constructor == Array)
-            res.send("Inserted employee id :" + element[0].EmpID);
+  const name = req.body.name;
+  const empcode = req.body.empcode;
+  const salary = req.body.salary;
+
+  var sql = "INSERT INTO employee (Name,EmpCode,Salary) values (?,?,?);";
+  mysqlConnection.query(sql,[name, empcode, salary],(err, rows, fields) => {
+      if (!err) {  
+       
+        res.json({
+          status:1,
+          message: "Data inserted Successfully",
+          data: rows
         });
       } else console.log(err);
     }
   );
+
+}); 
+
+
+//Update  employee
+app.post('/employee/:id', (req, res) => {
+  // let data = req.body;
+  const name = req.body.name;
+  const empcode = req.body.empcode;
+  const salary = req.body.salary;
+  let sql = "UPDATE employee SET Name='"+name+"', EmpCode= '"+ empcode +"', Salary='"+ salary +"' WHERE EmpID="+req.params.id; 
+console.log(sql);
+
+  mysqlConnection.query(sql, (err, rows,fields) => {
+    if (!err) {
+            console.log(sql)
+             res.send('Updated Successfully');
+            } else console.log(err);
+  });
 });
+
